@@ -1,0 +1,30 @@
+{
+    "name": "tokin/json-web-tokin",
+    "description": "A JSON Web Token Library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Frost",
+            "email": "mfrost.design@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tokin\\JWT\\": "src/JWT"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tokin\\Tests\\JWT\\": "tests/JWT"
+        }
+    },
+    "scripts": {
+        "tests": "./vendor/bin/phpunit",
+        "test": "./vendor/bin/phpunit"
+    }
+}
