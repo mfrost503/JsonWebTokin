@@ -76,8 +76,12 @@ class JsonWebToken
      *
      * @return string
      */
-    public function getSignature()
+    public function getSignature($decode = false)
     {
+        if ($decode) {
+            return $this->base64UrlDecode($this->signature);
+        }
+
         return $this->signature;
     }
 
@@ -89,5 +93,16 @@ class JsonWebToken
     public function getOriginalToken()
     {
         return $this->token;
+    }
+
+    /**
+     * Base64 URL Decoding Method
+     *
+     * @param string $data
+     * @return string
+     */
+    protected function base64UrlDecode($data)
+    {
+        return base64_decode(strtr($data, '-_', '+/')); 
     }
 }
