@@ -10,10 +10,10 @@
 namespace Tokin\Tests\JWT;
 
 use PHPUnit\Framework\TestCase;
-use Tokin\JWT\Verifier;
+use Tokin\JWT\SH256Verifier;
 use Tokin\JWT\JsonWebToken;
 
-class VerifierTest extends TestCase
+class SH256VerifierTest extends TestCase
 {
     /**
      * @var array 
@@ -71,7 +71,7 @@ class VerifierTest extends TestCase
      */
     public function testEnsureTokenWillValidate()
     {
-        $verifier = new Verifier();
+        $verifier = new SH256Verifier();
         $jwt = new JsonWebToken($this->token);
         $this->assertTrue($verifier->verify($jwt, $this->key));
     }
@@ -81,7 +81,7 @@ class VerifierTest extends TestCase
      */
     public function testEnsureInvalidKeyDoesNotVerify()
     {
-        $verifier = new Verifier();
+        $verifier = new SH256Verifier();
         $jwt = new JsonWebToken($this->token);
         $this->assertFalse($verifier->verify($jwt, $this->badKey));
     } 
