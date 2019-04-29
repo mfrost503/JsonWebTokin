@@ -9,12 +9,18 @@
     verbose="false">
     <testsuites>
         <testsuite name="all">
+            <directory>tests</directory>
+        </testsuite>
+        <testsuite name="JWT">
             <directory>tests/JWT</directory>
+        </testsuite>
+        <testsuite name="RSA">
+            <directory>tests/RSA</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src/JWT</directory>
+            <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
 </phpunit>

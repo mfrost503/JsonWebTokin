@@ -13,7 +13,7 @@ class RS256Verifier implements VerifierInterface
     /**
      * @const algorithm
      */
-    const ALGORITHM = OPENSSL_ALGO_SH256;
+    const ALGORITHM = "sha256WithRSAEncryption";
 
     /**
      * Validate method to satisfy the interface
@@ -25,8 +25,8 @@ class RS256Verifier implements VerifierInterface
     public function verify(JsonWebToken $token, $key)
     {
         $signature = $token->getSignature(true);
-        $message = $token->getHeader() . '.' . $this->getPayload();
-        return openssl_verify($message, $signature, $key, self::ALGORITHM);
+        $message = $token->getHeader() . '.' . $token->getPayload();
+        return (bool)openssl_verify($message, $signature, $key, self::ALGORITHM);
     }
     
 }

@@ -8,6 +8,8 @@
  */
 namespace Tokin\RSA;
 
+use Exception;
+
 class PublicKey
 {
     /**
@@ -36,8 +38,12 @@ class PublicKey
             throw new \Exception("Missing Certificate: A Certificate is required to generate a public key");
         }
 
-        $keyObject = openssl_pkey_get_public($this->certificate->getCertificate());
-        $keyDetails = openssl_pkey_get_details($keyObject);
-        return $keyDetails['key'];
+        try {
+            $keyObject = openssl_pkey_get_public($this->certificate->getCertificate());
+            $keyDetails = openssl_pkey_get_details($keyObject);
+            return $keyDetails['key'];
+        } catch (\Throwable $e) {
+            throw new \Exception("Error getting public key from certificate");
+        }
     }
 }

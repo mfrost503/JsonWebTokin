@@ -40,7 +40,6 @@ class PublicKeyService
     {
         $this->certificate = $certificate;
         $this->publicKey = $publicKey;
-        $this->setKeys();
     }
 
     /**
@@ -58,6 +57,7 @@ class PublicKeyService
      */
     public function getPublicKey()
     {
+        $this->setKeys();
         if (empty($this->keys)) {
             return null;
         }
@@ -66,5 +66,15 @@ class PublicKeyService
         $this->certificate->setData($certificate_data);
         $this->publicKey->setCertificate($this->certificate);
         return $this->publicKey->getKey();
+    }
+
+    /**
+     * Method to set the url that is used to fetch the certificates
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 }

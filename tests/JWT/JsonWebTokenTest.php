@@ -76,6 +76,7 @@ class JsonWebTokenTest extends TestCase
         $this->assertEquals($jwt->getHeader(), $header);
         $this->assertEquals($jwt->getPayload(), $payload);
         $this->assertEquals($jwt->getSignature(), $signature);
+        $this->assertEquals($jwt->getSignature(true), $this->base64UrlDecode($signature));
         $this->assertEquals($jwt->getOriginalToken(), $this->token);
     }
 
@@ -105,5 +106,13 @@ class JsonWebTokenTest extends TestCase
     private function base64UrlEncode($input)
     {
         return rtrim(strtr(base64_encode($input), '+/', '-_'), '=');
+    }
+
+    /**
+     * helper to base64 url decode input
+     */
+    private function base64UrlDecode($input)
+    {
+        return base64_decode(strtr($input, '-_', '+/')); 
     }
 }
