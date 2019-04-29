@@ -43,12 +43,10 @@ class X509Certificate
         $cert .= chunk_split($this->data, 64, PHP_EOL);
         $cert .= '-----END CERTIFICATE-----';
 
-        $certificate = openssl_x509_read($cert);
-
-        if (is_resource($certificate)) {
-            return $certificate;
+        try {
+            return openssl_x509_read($cert);
+        } catch (\Throwable $e) {
+            throw new Exception("Invalid X509 Certificate");
         }
-
-        throw new Exception("Invalid X509 Certificate");
     }
 }

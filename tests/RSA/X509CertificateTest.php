@@ -52,7 +52,7 @@ class X509CertificateTest extends TestCase
 
     /**
      * Test to ensure invalid key does not return a certificate
-     * @expectedException \Exception
+     * @expectedException \Throwable
      */
     public function testInvalidKeyThrowsException()
     {
